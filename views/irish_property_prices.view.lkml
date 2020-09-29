@@ -98,6 +98,10 @@ view: irish_property_prices {
     value_format_name: decimal_0
   }
 
+  measure: count_address_line_1 {
+  type: count_distinct
+  sql: ${address_line_1} ;;
+  }
   set: details {
     fields: [address_line_1,address_line_2,address_line_3,county,description_of_property,property_size_description,total_price]
   }

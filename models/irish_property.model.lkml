@@ -1,4 +1,4 @@
-connection: "bq_standard"
+connection: "bigquery_personal_instance"
 
 # include all the views
 include: "/views/**/*.view"

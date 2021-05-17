@@ -10,4 +10,15 @@ datagroup: irish_property_default_datagroup {
 
 persist_with: irish_property_default_datagroup
 
-explore: irish_property_prices {}
+access_grant: pii {
+  user_attribute: can_see_personal_information
+  allowed_values: ["yes"]
+}
+
+explore: irish_property_prices {
+  description: "This explore if for Irish Property Prices only within Dublin"
+conditionally_filter: {
+  filters: [irish_property_prices.county: "Dublin"]
+  unless: [address]
+}
+}

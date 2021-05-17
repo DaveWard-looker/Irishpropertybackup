@@ -18,6 +18,7 @@ view: irish_property_prices {
   }
 
   dimension: address_line_3 {
+
     type: string
     sql: ${TABLE}.Address_line_3 ;;
   }

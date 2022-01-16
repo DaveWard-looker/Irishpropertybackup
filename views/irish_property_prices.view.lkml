@@ -1,5 +1,5 @@
 view: irish_property_prices {
-  sql_table_name: `daveward_demodataset.irish_property_prices`
+  sql_table_name: `daveward_demodataset.irish_property_price`
     ;;
 
   dimension: address {
@@ -28,7 +28,7 @@ view: irish_property_prices {
     sql: ${TABLE}.County ;;
   }
 
-  dimension_group: date_of_sale__dd_mm_yyyy_ {
+  dimension_group: date_of_sale {
     type: time
     timeframes: [
       raw,
@@ -58,7 +58,7 @@ view: irish_property_prices {
     sql: ${TABLE}.Postal_Code ;;
   }
 
-  dimension: price______ {
+  dimension: price {
     hidden: yes
     type: number
     sql: ${TABLE}.Price______ ;;
@@ -81,17 +81,94 @@ view: irish_property_prices {
 
   measure: total_price {
     type: sum
-    sql: ${price______} ;;
+    sql: ${price} ;;
     value_format_name: eur_0
     drill_fields: [details*]
   }
 
   measure: average_price {
     type: average
-    sql: ${price______} ;;
+    sql: ${price} ;;
     value_format_name: eur_0
     drill_fields: [details*]
   }
+
+  dimension: is_this_year {
+    type: yesno
+    sql: ${date_of_sale_year} =  EXTRACT(YEAR FROM CURRENT_DATE) ;;
+  }
+
+  dimension: is_last_year {
+    type: yesno
+    sql:  ${date_of_sale_year} =  EXTRACT(YEAR FROM CURRENT_DATE)-1 ;;
+  }
+
+  dimension: is_included {
+    type: yesno
+    sql: ${price} < 2000000 and not_full_market_price =  "No" ;;
+  }
+
+  measure: average_price_last_year {
+    type: average
+    sql: ${price} ;;
+    value_format_name: eur_0
+    drill_fields: [details*]
+    filters: [is_last_year: "Yes", is_included: "No"]
+  }
+
+  measure: average_price_this_year {
+    type: average
+    sql: ${price} ;;
+    value_format_name: eur_0
+    drill_fields: [details*]
+    filters: [is_this_year: "Yes", is_included: "No"]
+  }
+
+  measure: total_price_last_year {
+    type: sum
+    sql: ${price} ;;
+    value_format_name: eur_0
+    drill_fields: [details*]
+    filters: [is_last_year: "Yes", is_included: "No"]
+  }
+
+  measure: total_price_this_year {
+    type: sum
+    sql: ${price} ;;
+    value_format_name: eur_0
+    drill_fields: [details*]
+    filters: [is_this_year: "Yes", is_included: "No"]
+  }
+
+  measure: count_sales_last_year {
+    type: count
+    drill_fields: [details*]
+    filters: [is_last_year: "Yes", is_included: "No"]
+  }
+
+  measure: count_sales_this_year {
+    type: count
+    drill_fields: [details*]
+    filters: [is_this_year: "Yes", is_included: "No"]
+  }
+
+  measure: max_sales_last_year {
+    type: max
+    sql: ${price} ;;
+    value_format_name: eur_0
+    drill_fields: [details*]
+    filters: [is_last_year: "Yes", is_included: "No"]
+  }
+
+  measure: max_sales_this_year {
+    type: max
+    sql: ${price} ;;
+    value_format_name: eur_0
+    drill_fields: [details*]
+    filters: [is_this_year: "Yes", is_included: "No"]
+  }
+
+
 
   measure: count_county {
     type: count_distinct

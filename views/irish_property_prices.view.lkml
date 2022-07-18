@@ -35,6 +35,7 @@ view: irish_property_prices {
       date,
       week,
       month,
+      month_name,
       quarter,
       year
     ]

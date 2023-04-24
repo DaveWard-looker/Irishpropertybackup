@@ -137,7 +137,7 @@ dimension: area {
   measure: max_sales_last_year {
     type: max
     sql: ${price} ;;
-    value_format_name: eur_0
+    value_format_name: eur
     filters: [is_last_year: "Yes", is_included: "No"]
   }
 

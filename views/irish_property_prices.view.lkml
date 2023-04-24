@@ -162,5 +162,12 @@ dimension: area {
   }
 
 
+  measure: count_county {
+    type: count_distinct
+    sql: ${county} ;;
+    value_format_name: decimal_0
+  }
+
+
 
 }

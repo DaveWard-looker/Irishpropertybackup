@@ -148,6 +148,12 @@ dimension: area {
     filters: [is_this_year: "Yes", is_included: "No"]
   }
 
+  measure: median_price  {
+    type: median
+    sql: ${price} ;;
+    value_format_name: eur
+  }
+
 
 
   measure: count_county {

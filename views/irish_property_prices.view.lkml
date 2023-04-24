@@ -8,6 +8,7 @@ view: irish_property_prices {
   }
 
  dimension: eircode {
+  label: "Postal Code"
    type: string
   sql: ${TABLE}.eircode ;;
  }

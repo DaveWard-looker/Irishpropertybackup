@@ -151,7 +151,7 @@ dimension: area {
   measure: median_price  {
     type: median
     sql: ${price} ;;
-    value_format_name: eur
+    value_format_name: eur_0
   }
 
 

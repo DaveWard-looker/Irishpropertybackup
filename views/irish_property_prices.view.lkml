@@ -155,5 +155,12 @@ dimension: area {
   }
 
 
+  measure: median_last_year {
+    type: median
+    sql: ${price} ;;
+    filters: [is_last_year: "Yes"]
+  }
+
+
 
 }

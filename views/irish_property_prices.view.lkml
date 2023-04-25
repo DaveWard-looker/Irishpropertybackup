@@ -70,6 +70,11 @@ dimension: area {
     type: count
   }
 
+  measure: no_of_vat_exclusive_sales {
+    type: count
+    filters: [vat_exclusive: "Yes"]
+  }
+
   measure: total_price {
     type: sum
     sql: ${price} ;;

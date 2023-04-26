@@ -154,6 +154,12 @@ dimension: area {
     filters: [is_this_year: "Yes", is_included: "No"]
   }
 
+  measure: full_market_sales {
+    type: sum
+    sql: ${price} ;;
+    filters: [not_full_market_price: "No"]
+  }
+
   measure: median_price  {
     type: median
     sql: ${price} ;;
